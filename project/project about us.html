@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel=stylesheet href=project.css>
+    <link rel=icon href=hourglass.jpeg type=image/jpg>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HourGlass University - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar: Consistent across all pages -->
+    <nav class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="project.html" class="text-2xl font-bold text-indigo-700 flex items-center rounded-lg px-2 py-1 hover:bg-gray-50 transition-colors">
+                <img src="https://placehold.co/40x40/4f46e5/ffffff?text=U" alt="University Logo" class="inline-block mr-2 rounded-full shadow-sm">
+                HourGlass University
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="project.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Home</a>
+                <a href="project about us.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">About Us</a>
+                <a href="project academics.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Academics</a>
+                <a href="project admissions.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Admissions</a>
+                <a href="project portal.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Student Portal</a>
+                <a href="project contact.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-700 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-md shadow-lg border border-gray-100">
+            <a href="project.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Home</a>
+            <a href="project about us.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">About Us</a>
+            <a href="project academics.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Academics</a>
+            <a href="project admissions.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Admissions</a>
+            <a href="project portal.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Student Portal</a>
+            <a href="project contact.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- About Us Page Content -->
+    <section class="py-16 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl sm:text-4xl font-bold text-center text-indigo-700 mb-10 pb-4 border-b-2 border-indigo-200">
+                About Our University
+            </h1>
+            <div class="md:flex md:space-x-8 items-center">
+                <div class="md:w-1/2 mb-6 md:mb-0">
+                    <img src="uni campus.jpg" alt="University Campus" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+                <div class="md:w-1/2">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        HourGlass University is a leading institution dedicated to academic excellence, groundbreaking research, and community engagement. With a rich history spanning over 100 years, we are committed to fostering a vibrant learning environment that prepares students to become leaders and innovators in a rapidly changing world.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Our diverse faculty, state-of-the-art facilities, and collaborative spirit create an unparalleled educational experience. We believe in nurturing critical thinking, creativity, and a passion for lifelong learning.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        We pride ourselves on our inclusive community, where students from all backgrounds can thrive and contribute to a global society. Our alumni are testaments to the impact of a University Name education, excelling in various fields worldwide.
+                    </p>
+                    <a href="project contact.html" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full text-md mt-6 transition-colors duration-300">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h2 class="text-2xl font-bold text-indigo-700 mb-6 border-b border-indigo-100 pb-2">Our Mission & Vision</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold text-indigo-800 mb-3">Our Mission</h3>
+                        <p class="text-gray-700">
+                            To educate and inspire students to become ethical leaders and global citizens through innovative teaching, rigorous scholarship, and dedicated service. We aim to advance knowledge and create a positive impact on society.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-indigo-800 mb-3">Our Vision</h3>
+                        <p class="text-gray-700">
+                            To be a globally recognized university at the forefront of discovery and innovation, transforming lives and addressing the world's most pressing challenges.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16">
+                <h2 class="text-2xl font-bold text-indigo-700 mb-8 border-b border-indigo-100 pb-2 text-center">Our Leadership</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    <div class="text-center bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100">
+                        <img src="ziv lim.jpg" alt="Dr. Ziv Lim" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+                        <h3 class="text-lg font-semibold text-indigo-800">Dr. Ziv Lim</h3>
+                        <p class="text-sm text-gray-600">President</p>
+                    </div>
+                    <div class="text-center bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100">
+                        <img src="jane doe.jpeg" alt="Prof. Jane Doe" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+                        <h3 class="text-lg font-semibold text-indigo-800">Prof. Jane Doe</h3>
+                        <p class="text-sm text-gray-600">Provost</p>
+                    </div>
+                    <div class="text-center bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100">
+                        <img src="alex lee.jpg" alt="Dr. Alex Lee" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+                        <h3 class="text-lg font-semibold text-indigo-800">Dr. Alex Lee</h3>
+                        <p class="text-sm text-gray-600">Dean of Academics</p>
+                    </div>
+                    <div class="text-center bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-100">
+                        <img src="emily chen.jpg" alt="Ms. Emily Chen" class="rounded-full mx-auto mb-4 w-32 h-32 object-cover">
+                        <h3 class="text-lg font-semibold text-indigo-800">Ms. Emily Chen</h3>
+                        <p class="text-sm text-gray-600">Director of Admissions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer: Consistent across all pages -->
+    <footer class="bg-indigo-800 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4">HourGlass University</h3>
+                <p class="text-sm">HourGlass University, Taman Pelangi Indah, 81800 Ulu Tiram</p>
+                <p class="text-sm">Phone: +601156955430</p>
+                <p class="text-sm">Email: hourglass@university.edu</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                <ul>
+                    <li class="mb-2"><a href="project about us.html" class="hover:underline text-gray-200">About Us</a></li>
+                    <li class="mb-2"><a href="project academics.html" class="hover:underline text-gray-200">Academics</a></li>
+                    <li class="mb-2"><a href="project admissions.html" class="hover:underline text-gray-200">Admissions</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Campus Life</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Resources</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Library</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Faculty Directory</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Alumni</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 16h-2V9h2v9zm4 0h-2V9h2v9zm4 0h-2V9h2v9zm-6-10H8v10h2V8zm4 0h-2v10h2V8zm4 0h-2v10h2V8z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c-1.1.5-2.3.8-3.6.9 1.3-.8 2.2-2 2.7-3.4-.6.4-1.4.6-2.2.8C18.1 3.4 16.9 3 15.6 3c-2.4 0-4.4 2-4.4 4.4 0 .3 0 .7.1 1-.4-.1-.8-.2-1.2-.2-2.3 0-4.4 1.2-5.8 3.1-.3.5-.6 1-.8 1.6C4.4 13.5 3 15.5 3 17.7c0 2.2 1.3 4.2 3.1 5.3-.2-.1-.4-.1-.6-.2-.7 0-1.4-.2-2-.5 0 .1 0 .2 0 .3 0 1.6 1.1 2.9 2.5 3.2-.3.1-.7.1-1 .1-.2 0-.4 0-.6-.1.4 1.3 1.5 2.2 2.8 2.3-.9.7-2 1.1-3.2 1.1-.2 0-.4 0-.6-.1 1.2.8 2.7 1.3 4.3 1.3 5.2 0 8.1-4.3 8.1-8.1 0-.1 0-.2 0-.3.4-.3.7-.7 1-1.2.7-.6 1.3-1.3 1.8-2.1z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.49v-1.74c-2.8.6-3.39-1.34-3.39-1.34-.46-1.16-1.12-1.47-1.12-1.47-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.88 1.5 2.3 1.06 2.87.81.09-.61.34-1.03.62-1.27-2.18-.25-4.47-1.09-4.47-4.83 0-1.07.38-1.95 1.02-2.63-.1-.25-.45-1.25.1-2.61 0 0 .8-.26 2.6.98.76-.21 1.57-.32 2.38-.32.81 0 1.62.11 2.38.32 1.8-1.24 2.6-.98 2.6-.98.55 1.36.2 2.36.1 2.61.64.68 1.02 1.56 1.02 2.63 0 3.75-2.29 4.58-4.48 4.83.35.3.67.88.67 1.77v2.62c0 .27.18.58.68.49C21.13 20.16 25 16.42 25 12 25 6.48 20.52 2 15 2z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm text-gray-400 mt-8 border-t border-indigo-700 pt-6">
+            &copy; 2025 HourGlass University
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.querySelector('button[onclick*="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

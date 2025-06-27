@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel=stylesheet href=project.css>
+    <link rel=icon href=hourglass.jpeg type=image/jpg>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HourGlass University - Student Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="bg-white shadow-md p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="project.html" class="text-2xl font-bold text-indigo-700 flex items-center rounded-lg px-2 py-1 hover:bg-gray-50 transition-colors">
+                <img src="https://placehold.co/40x40/4f46e5/ffffff?text=U" alt="University Logo" class="inline-block mr-2 rounded-full shadow-sm">
+                HourGlass University
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="project.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Home</a>
+                <a href="project about us.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">About Us</a>
+                <a href="project academics.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Academics</a>
+                <a href="project admissions.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Admissions</a>
+                <a href="project portal.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Student Portal</a>
+                <a href="project contact.html" class="text-gray-700 hover:text-indigo-600 font-medium navbar-link rounded-md px-3 py-2 transition-colors duration-200">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-700 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white mt-4 rounded-md shadow-lg border border-gray-100">
+            <a href="project.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Home</a>
+            <a href="project about us.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">About Us</a>
+            <a href="project academics.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Academics</a>
+            <a href="project admissions.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Admissions</a>
+            <a href="project portal.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Student Portal</a>
+            <a href="project contact.html" class="block py-3 px-4 text-gray-700 hover:bg-gray-100 rounded-md transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <section class="py-16 px-4 bg-white min-h-[calc(100vh-100px-150px)] flex items-center justify-center">
+        <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+            <h1 class="text-3xl font-bold text-center text-indigo-700 mb-8">Student Portal Login</h1>
+            <p class="text-center text-gray-600 mb-6">Access your courses, grades, and university resources.</p>
+
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="studentId" class="block text-sm font-medium text-gray-700 mb-1">Student ID</label>
+                    <input type="text" id="studentId" name="studentId" required
+                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="DCS2409324" maxlength=10>
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" name="password" required
+                           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                           placeholder="Enter your password">
+                    <div id="password-strength-indicator">
+                        <div id="strength-bar"></div>
+                    </div>
+                    <p id="password-strength-text" class="text-xs mt-2 text-gray-500">Enter your password to check its strength.</p>
+                </div>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-colors duration-300 shadow-lg transform hover:scale-105">
+                    Log In
+                </button>
+            </form>
+
+            <div id="message-box" class="mt-6 p-4 rounded-md text-center hidden"></div>
+
+            <p class="text-center text-sm text-gray-500 mt-6">
+                <a href="#" class="text-indigo-600 hover:underline">Forgot your password?</a> | <a href="#" class="text-indigo-600 hover:underline">Register New Account</a>
+            </p>
+        </div>
+    </section>
+
+    <footer class="bg-indigo-800 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4">HourGlass University</h3>
+                <p class="text-sm">Hourglass University, Taman Pelangi Indah,81800 Ulu Tiram</p>
+                <p class="text-sm">Phone: +601156955430</p>
+                <p class="text-sm">Email: hourglass@university.edu</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                <ul>
+                    <li class="mb-2"><a href="project about us.html" class="hover:underline text-gray-200">About Us</a></li>
+                    <li class="mb-2"><a href="project academics.html" class="hover:underline text-gray-200">Academics</a></li>
+                    <li class="mb-2"><a href="project admissions.html" class="hover:underline text-gray-200">Admissions</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Campus Life</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Resources</h3>
+                <ul>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Library</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Faculty Directory</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Alumni</a></li>
+                    <li class="mb-2"><a href="#" class="hover:underline text-gray-200">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-4">Connect With Us</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 16h-2V9h2v9zm4 0h-2V9h2v9zm4 0h-2V9h2v9zm-6-10H8v10h2V8zm4 0h-2v10h2V8zm4 0h-2v10h2V8z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 6c-1.1.5-2.3.8-3.6.9 1.3-.8 2.2-2 2.7-3.4-.6.4-1.4.6-2.2.8C18.1 3.4 16.9 3 15.6 3c-2.4 0-4.4 2-4.4 4.4 0 .3 0 .7.1 1-.4-.1-.8-.2-1.2-.2-2.3 0-4.4 1.2-5.8 3.1-.3.5-.6 1-.8 1.6C4.4 13.5 3 15.5 3 17.7c0 2.2 1.3 4.2 3.1 5.3-.2-.1-.4-.1-.6-.2-.7 0-1.4-.2-2-.5 0 .1 0 .2 0 .3 0 1.6 1.1 2.9 2.5 3.2-.3.1-.7.1-1 .1-.2 0-.4 0-.6-.1.4 1.3 1.5 2.2 2.8 2.3-.9.7-2 1.1-3.2 1.1-.2 0-.4 0-.6-.1 1.2.8 2.7 1.3 4.3 1.3 5.2 0 8.1-4.3 8.1-8.1 0-.1 0-.2 0-.3.4-.3.7-.7 1-1.2.7-.6 1.3-1.3 1.8-2.1z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-gray-300 transition-colors">
+                        <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.16 6.84 9.49.5.09.68-.22.68-.49v-1.74c-2.8.6-3.39-1.34-3.39-1.34-.46-1.16-1.12-1.47-1.12-1.47-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.88 1.5 2.3 1.06 2.87.81.09-.61.34-1.03.62-1.27-2.18-.25-4.47-1.09-4.47-4.83 0-1.07.38-1.95 1.02-2.63-.1-.25-.45-1.25.1-2.61 0 0 .8-.26 2.6.98.76-.21 1.57-.32 2.38-.32.81 0 1.62.11 2.38.32 1.8-1.24 2.6-.98 2.6-.98.55 1.36.2 2.36.1 2.61.64.68 1.02 1.56 1.02 2.63 0 3.75-2.29 4.58-4.48 4.83.35.3.67.88.67 1.77v2.62c0 .27.18.58.68.49C21.13 20.16 25 16.42 25 12 25 6.48 20.52 2 15 2z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-sm text-gray-400 mt-8 border-t border-indigo-700 pt-6">
+            &copy; 2025 HourGlass University
+        </div>
+    </footer>
+
+    <script>
+        const mobileMenuButton = document.querySelector('button[onclick*="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('strength-bar');
+        const strengthText = document.getElementById('password-strength-text');
+        const messageBox = document.getElementById('message-box');
+        const loginForm = document.getElementById('loginForm');
+
+        passwordInput.addEventListener('input', updatePasswordStrength);
+
+        function updatePasswordStrength() {
+            const password = passwordInput.value;
+            let strength = 0;
+
+            const hasLowercase = /[a-z]/.test(password);
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasNumber = /[0-9]/.test(password);
+            const hasSpecial = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password);
+
+            if (password.length >= 8) strength += 20;
+            if (password.length >= 12) strength += 20;
+            if (hasLowercase) strength += 15;
+            if (hasUppercase) strength += 15;
+            if (hasNumber) strength += 15;
+            if (hasSpecial) strength += 15;
+
+            strength = Math.min(strength, 100);
+
+            strengthBar.style.width = strength + '%';
+            strengthBar.className = '';
+
+            if (password.length === 0) {
+                strengthBar.style.width = '0%';
+                strengthText.textContent = 'Enter your password to check its strength.';
+                strengthText.className = 'text-xs mt-2 text-gray-500';
+            } else if (strength < 40) {
+                strengthBar.classList.add('strength-weak');
+                strengthText.textContent = 'Weak: Try adding more characters, including numbers and symbols.';
+                strengthText.className = 'text-xs mt-2 text-red-600';
+            } else if (strength < 75) {
+                strengthBar.classList.add('strength-medium');
+                strengthText.textContent = 'Medium: Good start! Consider adding a mix of character types.';
+                strengthText.className = 'text-xs mt-2 text-orange-600';
+            } else {
+                strengthBar.classList.add('strength-strong');
+                strengthText.textContent = 'Strong: Excellent password!';
+                strengthText.className = 'text-xs mt-2 text-green-600';
+            }
+        }
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const studentId = document.getElementById('studentId').value;
+            const password = document.getElementById('password').value;
+
+            if (studentId.trim() === '' || password.trim() === '') {
+                displayMessage('Please enter both student ID and password.', 'error');
+                return;
+            }
+
+            if (password.length < 8) {
+                 displayMessage('Password must be at least 8 characters long.', 'error');
+            } else {
+                displayMessage('Login successful! Welcome, ' + studentId + '.', 'success');
+            }
+        });
+
+        function displayMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+
+            if (type === 'error') {
+                messageBox.classList.add('bg-red-100', 'text-red-800');
+            } else if (type === 'success') {
+                messageBox.classList.add('bg-green-100', 'text-green-800');
+            }
+            messageBox.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
