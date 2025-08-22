@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redeem – Loyalty</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand"><span class="logo"></span>Loyalty</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="home.html" id="nav-home">Home</a>
+        <a href="promotion.html" id="nav-promotion">Promotion</a>
+        <a href="redeem.html" id="nav-redeem" class="active">Redeem</a>
+        <a href="settings.html" id="nav-settings">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container safe">
+    <section class="points">
+      <article class="card points-card">
+        <div>
+          <div style="color:#6b7280;font-size:13px;">Your Points</div>
+          <div class="points-value" id="redeemPoints">0</div>
+          <span class="badge">Available</span>
+        </div>
+        <div style="flex:1;">
+          <div class="progress"><span style="width:100%"></span></div>
+          <div class="points-note">Redeem your favorite items below</div>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">Rewards</h2>
+
+    <section class="grid">
+      <article class="card redeem-item">
+        <div class="thumb"><img src="coffee.jpg" alt="Coffee"></div>
+        <div class="meta">
+          <div class="redeem-name">Coffee</div>
+          <div class="redeem-need">Requires <strong>500</strong> pts</div>
+        </div>
+        <button class="btn btn-primary" data-redeem data-cost="500">Redeem</button>
+      </article>
+
+      <article class="card redeem-item">
+        <div class="thumb"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop" alt="Burger"></div>
+        <div class="meta">
+          <div class="redeem-name">Burger</div>
+          <div class="redeem-need">Requires <strong>800</strong> pts</div>
+        </div>
+        <button class="btn btn-primary" data-redeem data-cost="800">Redeem</button>
+      </article>
+
+      <article class="card redeem-item">
+        <div class="thumb"><img src="headphones.jpg" alt="Headphones"></div>
+        <div class="meta">
+          <div class="redeem-name">Headphones</div>
+          <div class="redeem-need">Requires <strong>2000</strong> pts</div>
+        </div>
+        <button class="btn btn-primary" data-redeem data-cost="2000">Redeem</button>
+      </article>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initRedeem);
+  </script>
+</body>
+</html>
