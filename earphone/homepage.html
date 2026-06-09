@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EarPods Explorer — 3D Camera Transitions</title>
+<meta name="description" content="Interactive 3D EarPods Explorer — camera moves forward/back when clicking sections. Three.js + GSAP demo."/>
+<script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.152.2/examples/jsm/controls/OrbitControls.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<style>
+:root{
+  --bg:#060612;
+  --panel: rgba(255,255,255,0.03);
+  --accent1:#7fe6ff;
+  --accent2:#b384ff;
+  --muted:#9fb0bf;
+}
+
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#07031a);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;color:#fff;overflow:hidden;}
+#canvas-wrap{position:fixed;inset:0;z-index:0;display:block;}
+canvas{display:block;}
+
+/* UI overlay */
+.ui {
+  position:fixed;
+  z-index:10;
+  inset:20px;
+  pointer-events:none;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:space-between;
+}
+
+.left {
+  pointer-events:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width: min(420px, 36vw);
+}
+
+.brand {
+  font-size:clamp(22px, 3.4vw, 36px);
+  font-weight:800;
+  letter-spacing:0.6px;
+  color: white;
+  text-shadow: 0 6px 30px rgba(123,83,255,0.06);
+}
+
+.desc {
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.4;
+  max-width:48ch;
+}
+
+.buttons {
+  margin-top:8px;
+  display:flex;
+  gap:8px;
+  pointer-events:auto;
+}
+
+.btn {
+  background: linear-gradient(90deg, rgba(127,230,255,0.05), rgba(179,130,255,0.03));
+  border: 1px solid rgba(255,255,255,0.08);
+  padding:10px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:0.4px;
+  transition: transform .18s ease, box-shadow .18s;
+  box-shadow: 0 8px 28px rgba(2,6,12,0.6);
+}
+.btn:hover{ transform: translateY(-6px); box-shadow:0 22px 60px rgba(127,230,255,0.06);}
+
+.right {
+  pointer-events:auto;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.panel {
+  background: var(--panel);
+  border-radius:12px;
+  padding:10px 14px;
+  border: 1px solid rgba(255,255,255,0.04);
+  font-size:13px;
+  color:var(--muted);
+  min-width:140px;
+  text-align:center;
+}
+
+/* caption overlay */
+.caption {
+  position:fixed;
+  bottom:120px;
+  left:50%;
+  transform:translateX(-50%);
+  color: #ffffff;       /* 白色文字 */
+  font-size:1.2rem;
+  text-align:center;
+  opacity:0;
+  pointer-events:none;
+  z-index:10;
+  max-width:600px;
+  text-shadow: 0 0 6px #ffffff, 0 0 12px #cccccc;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: rgba(0,0,0,0.4); /* 半透明背景 */
+}
+.caption span {
+  display:inline-block;
+  margin-right:0.25em; /* 保留单词间空格 */
+}
+
+/* responsive */
+@media (max-width:860px){
+  .ui{flex-direction:column; align-items:flex-start; gap:10px;}
+  .left{width:92vw;}
+}
+</style>
+</head>
+<body>
+<div id="canvas-wrap"></div>
+
+<div class="ui" role="region" aria-label="Controls">
+  <div class="left">
+    <div class="brand">EarPods Explorer</div>
+    <div class="desc" id="desc">Click a section to glide the camera — explore Design, Sound, or Battery in 3D.</div>
+    <div class="buttons" role="toolbar" aria-label="Sections">
+      <button class="btn" data-target="design">Design</button>
+      <button class="btn" data-target="sound">Sound</button>
+      <button class="btn" data-target="battery">Battery</button>
+      <button class="btn" data-target="overview">Overview</button>
+    </div>
+  </div>
+  <div class="right">
+    <div class="panel" id="panelState">Overview</div>
+  </div>
+
+  <!-- Caption for cinematic text -->
+  <div class="caption" id="captionText"></div>
+</div>
+
+<script>
+/* =================== Setup Three.js Scene =================== */
+const container = document.getElementById('canvas-wrap');
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x03040a, 0.0025);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.outputEncoding = THREE.sRGBEncoding;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+container.appendChild(renderer.domElement);
+
+const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 5000);
+camera.position.set(0, 25, 140);
+camera.lookAt(0, 20, 0);
+
+let controls;
+try { controls = new THREE.OrbitControls(camera, renderer.domElement); controls.enabled=false; } catch(e){ controls=null; }
+
+const hemi = new THREE.HemisphereLight(0x223341, 0x0a0210, 0.6); scene.add(hemi);
+const keyLight = new THREE.PointLight(0x9bdcff, 1.2, 800, 2); keyLight.position.set(80,140,60); scene.add(keyLight);
+const fillLight = new THREE.PointLight(0xcfa2ff, 0.6, 600, 2); fillLight.position.set(-80,60,-40); scene.add(fillLight);
+const rim = new THREE.DirectionalLight(0xffffff,0.12); rim.position.set(0,1,-1); scene.add(rim);
+
+/* Starfield */
+const starGeo = new THREE.BufferGeometry();
+const starCount = 1800;
+const starPos = new Float32Array(starCount*3);
+for(let i=0;i<starCount;i++){
+  const r=600+Math.random()*1600;
+  const theta=Math.random()*Math.PI*2;
+  const phi=Math.acos((Math.random()*2)-1);
+  const x=r*Math.sin(phi)*Math.cos(theta);
+  const y=r*Math.sin(phi)*Math.sin(theta);
+  const z=r*Math.cos(phi);
+  starPos[i*3]=x; starPos[i*3+1]=y; starPos[i*3+2]=z;
+}
+starGeo.setAttribute('position',new THREE.BufferAttribute(starPos,3));
+const starMat = new THREE.PointsMaterial({ size:1.6, color:0xcfeeff, transparent:true, opacity:0.9 });
+const starField = new THREE.Points(starGeo, starMat);
+scene.add(starField);
+
+/* Ribbons */
+const ribbonsGroup = new THREE.Group();
+scene.add(ribbonsGroup);
+const ribbons = [];
+function makeRibbon(radius,segments,colorA,colorB,thickness){
+  const curvePoints = [];
+  const points=200;
+  for(let i=0;i<points;i++){
+    const t=i/(points-1);
+    const theta=(t-0.5)*Math.PI*1.6;
+    const r=radius+Math.sin(t*Math.PI*6)*6;
+    curvePoints.push(new THREE.Vector3(Math.sin(theta)*r,(t-0.5)*6,Math.cos(theta)*r*0.6));
+  }
+  const path = new THREE.CatmullRomCurve3(curvePoints);
+  const tubeGeometry = new THREE.TubeGeometry(path, segments, thickness, 12, false);
+  const mat = new THREE.MeshStandardMaterial({ color:colorA, emissive:colorB, emissiveIntensity:0.8, metalness:0.2, roughness:0.35, transparent:true, opacity:0.95 });
+  const mesh = new THREE.Mesh(tubeGeometry, mat);
+  mesh.userData.path=path;
+  ribbonsGroup.add(mesh);
+  ribbons.push(mesh);
+}
+makeRibbon(56,250,0x88eaff,0x9b6bff,2.6);
+makeRibbon(86,250,0xcfeeff,0xa384ff,1.9);
+makeRibbon(116,250,0xaee0ff,0xcfa8ff,1.1);
+
+/* Earbud */
+const earGroup = new THREE.Group();
+scene.add(earGroup);
+function makeBud(){
+  const bud=new THREE.Group();
+  const material=new THREE.MeshStandardMaterial({ color:0xffffff, metalness:0.15, roughness:0.22 });
+  const sphere=new THREE.Mesh(new THREE.SphereGeometry(10,32,32),material);
+  bud.add(sphere);
+  const stemGeo=new THREE.CylinderGeometry(3.6,3.6,28,18);
+  const stem=new THREE.Mesh(stemGeo, material);
+  stem.rotation.x=Math.PI*0.12;
+  stem.position.set(0,-15,6);
+  bud.add(stem);
+  return bud;
+}
+const leftBud=makeBud(); leftBud.position.set(-22,0,0); leftBud.rotation.y=0.12;
+const rightBud=makeBud(); rightBud.position.set(22,0,0); rightBud.rotation.y=-0.12;
+earGroup.add(leftBud,rightBud);
+const connectorGeom=new THREE.TorusGeometry(36,1.6,8,80,Math.PI);
+const connectorMat=new THREE.MeshBasicMaterial({color:0xa7b0ff, transparent:true, opacity:0.22});
+const connector=new THREE.Mesh(connectorGeom, connectorMat);
+connector.rotation.x=Math.PI*0.5; connector.position.set(0,-6,-6);
+earGroup.add(connector);
+earGroup.position.set(0,12,0);
+
+/* Ground */
+const planeGeo = new THREE.PlaneGeometry(1400,1400);
+const planeMat = new THREE.MeshStandardMaterial({ color:0x02060b, roughness:1, metalness:0, emissive:0x000000, opacity:1, transparent:true });
+const ground = new THREE.Mesh(planeGeo, planeMat);
+ground.rotation.x=-Math.PI/2;
+ground.position.y=-120;
+scene.add(ground);
+
+/* Camera positions */
+const cameraPositions = {
+  overview: { pos:new THREE.Vector3(0,26,140), look:new THREE.Vector3(0,20,0), desc:"Overview — calm scene with earphones center." },
+  design: { pos:new THREE.Vector3(0,18,70), look:new THREE.Vector3(0,10,0), desc:"Design — examine the earbud materials & shape." },
+  sound: { pos:new THREE.Vector3(0,6,40), look:new THREE.Vector3(0,6,0), desc:"Sound — dive into the soundwave ribbons." },
+  battery: { pos:new THREE.Vector3(40,32,80), look:new THREE.Vector3(10,18,0), desc:"Battery — perspective to connector & stem." }
+};
+
+/* Animate */
+let t=0;
+function animateFrame(){
+  t+=0.006;
+  starField.rotation.y+=0.0008;
+  ribbons.forEach((mesh,idx)=>{
+    const path=mesh.userData.path;
+    const pts=path.getPoints(200);
+    const jitter=0.6+idx*0.6;
+    mesh.geometry.dispose();
+    mesh.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts.map(p=>{
+      const off=Math.sin(t*(0.6+idx*0.2)+p.x*0.008)*jitter;
+      return new THREE.Vector3(p.x+off,p.y+Math.cos(t*0.9+p.z*0.01)*1.2,p.z+Math.sin(t*0.9+p.x*0.01)*1.2);
+    })),250,mesh.geometry.parameters.radius,12,false);
+    mesh.rotation.y=Math.sin(t*0.18+idx)*0.02;
+  });
+  earGroup.rotation.y=Math.sin(t*0.4)*0.06;
+  earGroup.position.y=10+Math.sin(t*0.6)*0.8;
+  renderer.render(scene,camera);
+  requestAnimationFrame(animateFrame);
+}
+requestAnimationFrame(animateFrame);
+
+/* Typing-style captions with per-word animation */
+function moveCameraTo(targetKey){
+  const target=cameraPositions[targetKey];
+  if(!target) return;
+
+  gsap.killTweensOf(camera.position);
+  gsap.to(camera.position,{
+    x:target.pos.x, y:target.pos.y, z:target.pos.z,
+    duration:1.5, ease:"power2.inOut",
+    onUpdate:function(){ camera.lookAt(target.look.x,target.look.y,target.look.z);}
+  });
+
+  document.getElementById('panelState').textContent = targetKey.charAt(0).toUpperCase()+targetKey.slice(1);
+  document.getElementById('desc').textContent = target.desc;
+
+  const caption = document.getElementById('captionText');
+  const messages = {
+    design: "Notice the smooth curves, compact stem, and premium finish — every detail matters.",
+    sound: "Flowing ribbons visualize sound vibrations — experience the depth and clarity.",
+    battery: "Long-lasting power hidden elegantly in the stem and connector — technology meets design.",
+    overview: ""
+  };
+
+  caption.innerHTML = ""; 
+  gsap.killTweensOf(caption);
+
+  if(messages[targetKey]){
+    const text = messages[targetKey];
+    // 按空格拆成单词，每个单词一个span
+    text.split(" ").forEach((word,i)=>{
+      const span = document.createElement('span');
+      span.textContent = word + " "; // 每个单词后保留空格
+      caption.appendChild(span);
+    });
+
+    caption.style.opacity = 1;  // 永远显示
+
+    const spans = caption.querySelectorAll('span');
+    spans.forEach((s,i)=>{
+      gsap.fromTo(s,{y:20,opacity:0},{y:0,opacity:1,delay:i*0.15,duration:0.7,ease:"power2.out"});
+    });
+  }
+
+  gsap.fromTo(earGroup.scale,{x:1.02,y:1.02,z:1.02},{x:1,y:1,z:1,duration:1.1,ease:"power2.out"});
+}
+
+/* Buttons */
+document.querySelectorAll('.btn').forEach(b=>{
+  b.addEventListener('click',ev=>{
+    const key = ev.currentTarget.getAttribute('data-target');
+    moveCameraTo(key);
+  });
+});
+
+/* Start at overview */
+moveCameraTo('overview');
+</script>
+</body>
+</html>
