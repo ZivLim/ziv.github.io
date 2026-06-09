@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elevate Fitness | A Complete Gym Experience</title>
+    <!-- Use Inter font for a modern look -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap">
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d0d;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Custom glow effect on button */
+        .cta-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 0, 100, 0.4);
+        }
+        .cta-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 25px rgba(255, 0, 100, 0.8);
+        }
+        
+        /* Custom Keyframes for Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Apply animations with Tailwind */
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .animate-fadeInUp-delay {
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        /* Responsive hamburger menu icon animation */
+        #mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #f0f0f0;
+            margin: 5px 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        #mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        #mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            color: #aaa;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Animated Background Canvas -->
+    <canvas id="animated-bg" class="animated-bg"></canvas>
+
+    <!-- Main Content Container -->
+    <div class="content min-h-screen flex flex-col justify-between">
+
+        <!-- Header -->
+        <header class="p-6 md:p-8 lg:p-10 flex justify-between items-center bg-gray-900 bg-opacity-50 backdrop-blur-sm sticky top-0 z-50">
+            <a href="#hero" class="text-3xl md:text-4xl font-extrabold text-white">Elevate<span class="text-pink-500">.</span></a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-300 hover:text-pink-500 transition-colors">About Us</a>
+                <a href="#services" class="text-gray-300 hover:text-pink-500 transition-colors">Services</a>
+                <a href="#testimonials" class="text-gray-300 hover:text-pink-500 transition-colors">Testimonials</a>
+                <a href="#pricing" class="text-gray-300 hover:text-pink-500 transition-colors">Pricing</a>
+                <a href="#contact" class="text-gray-300 hover:text-pink-500 transition-colors">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </header>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <nav id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-gray-900 z-40 flex-col items-center justify-center space-y-8 hidden">
+            <a href="#about" class="text-4xl font-bold text-gray-300 hover:text-pink-500 transition-colors" onclick="toggleMenu()">About Us</a>
+            <a href="#services" class="text-4xl font-bold text-gray-300 hover:text-pink-500 transition-colors" onclick="toggleMenu()">Services</a>
+            <a href="#testimonials" class="text-4xl font-bold text-gray-300 hover:text-pink-500 transition-colors" onclick="toggleMenu()">Testimonials</a>
+            <a href="#pricing" class="text-4xl font-bold text-gray-300 hover:text-pink-500 transition-colors" onclick="toggleMenu()">Pricing</a>
+            <a href="#contact" class="text-4xl font-bold text-gray-300 hover:text-pink-500 transition-colors" onclick="toggleMenu()">Contact</a>
+        </nav>
+        
+        <!-- User ID Display (Removed Firebase, so this is no longer needed) -->
+        <!-- Hero Section -->
+        <section id="hero" class="flex-grow flex items-center justify-center text-center p-4 min-h-screen">
+            <div class="max-w-4xl px-4 md:px-8">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight leading-tight text-white animate-fadeInUp">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">ELEVATE</span> YOUR FITNESS.
+                </h1>
+                <p class="mt-6 md:mt-8 text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fadeInUp-delay">
+                    Unleash your potential with our state-of-the-art facilities and personalized training programs designed to transform you.
+                </p>
+                <div class="mt-10 md:mt-12 animate-fadeInUp-delay">
+                    <a href="#pricing" class="cta-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-10 rounded-full text-lg md:text-xl uppercase tracking-wider">
+                        Join Today
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 md:py-24 bg-gray-900 bg-opacity-70">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 animate-fadeIn">About Us</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                    <div class="md:w-1/2 animate-fadeInUp-delay">
+                        <img src="gymroom.jpg" alt="Our team training together" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left animate-fadeInUp-delay">
+                        <p class="text-lg text-gray-400 leading-relaxed mb-6">
+                            Elevate Fitness is more than just a gym; it's a community built on the principles of hard work, dedication, and personal growth. We believe that fitness is a journey, and we're here to provide the support, tools, and expertise you need to succeed. Our mission is to empower you to reach your full potential, both physically and mentally.
+                        </p>
+                        <p class="text-lg text-gray-400 leading-relaxed">
+                            With state-of-the-art equipment, certified trainers, and a positive atmosphere, we offer a unique training environment where you can challenge yourself and achieve your goals. Join our community and elevate your fitness journey.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 animate-fadeIn">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <!-- Service Card 1 -->
+                    <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-fadeInUp">
+                        <h3 class="text-2xl font-bold text-pink-500 mb-4">Personal Training</h3>
+                        <p class="text-gray-400">Get one-on-one coaching and a customized workout plan designed for your specific goals.</p>
+                    </div>
+                    <!-- Service Card 2 -->
+                    <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-fadeInUp-delay">
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4">Group Classes</h3>
+                        <p class="text-gray-400">Join our high-energy group classes, from HIIT to yoga, led by expert instructors.</p>
+                    </div>
+                    <!-- Service Card 3 -->
+                    <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg shadow-lg transform transition-transform hover:scale-105 animate-fadeInUp-delay">
+                        <h3 class="text-2xl font-bold text-teal-400 mb-4">Nutrition Coaching</h3>
+                        <p class="text-gray-400">Achieve a healthier lifestyle with our professional nutrition advice and meal planning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 md:py-24 bg-gray-900 bg-opacity-70">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 animate-fadeIn">What Our Members Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-md animate-fadeInUp">
+                        <p class="text-gray-300 italic mb-4">"Elevate Fitness has completely changed my life. The trainers are incredibly supportive and the atmosphere is always motivating."</p>
+                        <p class="text-pink-500 font-bold">- Jane Doe</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-md animate-fadeInUp-delay">
+                        <p class="text-gray-300 italic mb-4">"The variety of classes is amazing. I've never been bored and I'm seeing results faster than I ever thought possible."</p>
+                        <p class="text-pink-500 font-bold">- John Smith</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-800 p-6 rounded-lg shadow-md animate-fadeInUp-delay">
+                        <p class="text-gray-300 italic mb-4">"Finally a gym that feels like a community. Everyone is friendly, and the facilities are top-notch. Highly recommend!"</p>
+                        <p class="text-pink-500 font-bold">- Sarah Lee</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 animate-fadeIn">Our Pricing</h2>
+                <div class="flex flex-col lg:flex-row justify-center gap-8">
+                    <!-- Pricing Card 1 -->
+                    <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg shadow-xl text-center lg:w-1/3 transform transition-transform hover:scale-105 animate-fadeInUp">
+                        <h3 class="text-3xl font-bold mb-4 text-white">Basic</h3>
+                        <p class="text-5xl font-extrabold text-pink-500 mb-2">$49</p>
+                        <p class="text-gray-400 mb-6">per month</p>
+                        <ul class="text-gray-300 text-left space-y-2 mb-8">
+                            <li>&#x2713; Access to all gym equipment</li>
+                            <li>&#x2713; Locker room access</li>
+                            <li>&#x2717; Group classes</li>
+                            <li>&#x2717; Personal training</li>
+                        </ul>
+                        <button class="cta-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full uppercase tracking-wide">Select Plan</button>
+                    </div>
+                    <!-- Pricing Card 2 (Most Popular) -->
+                    <div class="bg-pink-600 bg-opacity-90 p-10 rounded-lg shadow-xl text-center lg:w-1/3 border-4 border-pink-500 transform transition-transform hover:scale-105 animate-fadeInUp-delay">
+                        <p class="text-sm font-bold uppercase text-white mb-2">Most Popular</p>
+                        <h3 class="text-3xl font-bold mb-4 text-white">Premium</h3>
+                        <p class="text-5xl font-extrabold text-white mb-2">$79</p>
+                        <p class="text-gray-200 mb-6">per month</p>
+                        <ul class="text-gray-100 text-left space-y-2 mb-8">
+                            <li>&#x2713; All Basic features</li>
+                            <li>&#x2713; Unlimited group classes</li>
+                            <li>&#x2713; One personal training session/month</li>
+                            <li>&#x2713; Sauna and spa access</li>
+                        </ul>
+                        <button class="cta-button bg-white text-pink-600 font-bold py-3 px-8 rounded-full uppercase tracking-wide shadow-md">Select Plan</button>
+                    </div>
+                    <!-- Pricing Card 3 -->
+                    <div class="bg-gray-900 bg-opacity-70 p-8 rounded-lg shadow-xl text-center lg:w-1/3 transform transition-transform hover:scale-105 animate-fadeInUp">
+                        <h3 class="text-3xl font-bold mb-4 text-white">Elite</h3>
+                        <p class="text-5xl font-extrabold text-purple-400 mb-2">$149</p>
+                        <p class="text-gray-400 mb-6">per month</p>
+                        <ul class="text-gray-300 text-left space-y-2 mb-8">
+                            <li>&#x2713; All Premium features</li>
+                            <li>&#x2713; Unlimited personal training</li>
+                            <li>&#x2713; Custom meal plans</li>
+                            <li>&#x2713; Exclusive member-only events</li>
+                        </ul>
+                        <button class="cta-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full uppercase tracking-wide">Select Plan</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 bg-gray-900 bg-opacity-70">
+            <div class="container mx-auto px-4 md:px-8">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 animate-fadeIn">Contact Us</h2>
+                <div class="max-w-xl mx-auto">
+                    <!-- Formspree form integration -->
+                    <!-- IMPORTANT: Replace the placeholder URL with your actual Formspree endpoint -->
+                    <form id="contact-form" action="https://formspree.io/f/mdkdykgd" method="POST" class="space-y-6 animate-fadeInUp">
+                        <div>
+                            <label for="name" class="block text-lg font-medium text-gray-300">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-100 placeholder-gray-500" required>
+                        </div>
+                        <div>
+                            <label for="_replyto" class="block text-lg font-medium text-gray-300">Email</label>
+                            <input type="email" id="_replyto" name="_replyto" class="mt-1 block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-100 placeholder-gray-500" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-lg font-medium text-gray-300">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500 text-gray-100 placeholder-gray-500" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full cta-button bg-pink-600 hover:bg-pink-700 text-white font-bold py-4 px-10 rounded-md text-lg uppercase tracking-wider">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Submission Success Modal -->
+        <div id="success-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <div class="flex flex-col items-center">
+                    <div class="bg-green-500 rounded-full h-16 w-16 flex items-center justify-center mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Message Sent!</h3>
+                    <p class="text-gray-400">Thank you for your message. We will get back to you shortly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="p-6 md:p-8 lg:p-10 text-center text-gray-500">
+            <p>&copy; 2025 Elevate Fitness. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- JavaScript for animated background and mobile menu -->
+    <script>
+        // Animated background functionality
+        const canvas = document.getElementById('animated-bg');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        const numParticles = 80;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = 'rgba(255, 0, 100, 0.8)';
+                this.history = [{ x: this.x, y: this.y }];
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) {
+                    this.vx *= -1;
+                }
+                if (this.y < 0 || this.y > canvas.height) {
+                    this.vy *= -1;
+                }
+
+                this.history.push({ x: this.x, y: this.y });
+                if (this.history.length > 50) {
+                    this.history.shift();
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.lineWidth = this.size;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = this.color;
+                ctx.moveTo(this.history[0].x, this.history[0].y);
+
+                for (let i = 1; i < this.history.length; i++) {
+                    const alpha = i / this.history.length;
+                    ctx.lineTo(this.history[i].x, this.history[i].y);
+                    ctx.strokeStyle = `rgba(255, 0, 100, ${alpha * 0.8})`;
+                }
+                ctx.stroke();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.fillStyle = 'rgba(13, 13, 13, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            mobileMenuBtn.classList.toggle('active');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+
+        // Modal functionality
+        const successModal = document.getElementById('success-modal');
+        const closeButton = successModal.querySelector('.close-button');
+
+        function showModal() {
+            successModal.style.display = 'flex';
+        }
+        
+        function closeModal() {
+            successModal.style.display = 'none';
+        }
+
+        closeButton.addEventListener('click', closeModal);
+        window.addEventListener('click', (event) => {
+            if (event.target === successModal) {
+                closeModal();
+            }
+        });
+
+        // Event listeners and initialization on window load
+        window.onload = function () {
+            resizeCanvas();
+            initParticles();
+            animate();
+            
+            // Handle form submission with Formspree
+            const form = document.getElementById('contact-form');
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    if (response.ok) {
+                        showModal(); // Show success modal
+                        form.reset(); // Reset form
+                    } else {
+                        console.error('Formspree submission failed:', response.statusText);
+                        // Handle error case here, e.g., show an error message
+                    }
+                } catch (error) {
+                    console.error('Network error during form submission:', error);
+                }
+            });
+        };
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+</body>
+</html>
