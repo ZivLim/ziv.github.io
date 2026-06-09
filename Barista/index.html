@@ -245,52 +245,67 @@ document.addEventListener('DOMContentLoaded', () => {
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
 
-  if (!hamburger || !navLinks) return;
-
-  // Toggle menu open/close
-  function openMenu() {
-    hamburger.setAttribute('aria-expanded', 'true');
-    navLinks.classList.add('active');
-    document.body.classList.add('nav-open'); // used by your CSS to transform hamburger
-    document.body.style.overflow = 'hidden'; // lock scroll while menu open
-  }
-
-  function closeMenu() {
-    hamburger.setAttribute('aria-expanded', 'false');
-    navLinks.classList.remove('active');
-    document.body.classList.remove('nav-open');
-    document.body.style.overflow = ''; // restore scroll
-  }
-
-  hamburger.addEventListener('click', (e) => {
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
-    if (expanded) closeMenu();
-    else openMenu();
-  });
-
-  // Close when any nav link is clicked (mobile)
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      if (navLinks.classList.contains('active')) closeMenu();
-    });
-  });
-
-  // Close when clicking outside the nav links (mobile)
-  document.addEventListener('click', (e) => {
-    if (!navLinks.classList.contains('active')) return;
-
-    // if click is inside nav or on hamburger, ignore
-    if (navLinks.contains(e.target) || hamburger.contains(e.target)) return;
-
-    // else close
-    closeMenu();
-  });
-
-  // Optional: close menu on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-      closeMenu();
+  if (hamburger && navLinks) {
+    // Toggle menu open/close
+    function openMenu() {
+      hamburger.setAttribute('aria-expanded', 'true');
+      navLinks.classList.add('active');
+      document.body.classList.add('nav-open'); // used by your CSS to transform hamburger
+      document.body.style.overflow = 'hidden'; // lock scroll while menu open
     }
+
+    function closeMenu() {
+      hamburger.setAttribute('aria-expanded', 'false');
+      navLinks.classList.remove('active');
+      document.body.classList.remove('nav-open');
+      document.body.style.overflow = ''; // restore scroll
+    }
+
+    hamburger.addEventListener('click', (e) => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      if (expanded) closeMenu();
+      else openMenu();
+    });
+
+    // Close when any nav link is clicked (mobile)
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (navLinks.classList.contains('active')) closeMenu();
+      });
+    });
+
+    // Close when clicking outside the nav links (mobile)
+    document.addEventListener('click', (e) => {
+      if (!navLinks.classList.contains('active')) return;
+
+      // if click is inside nav or on hamburger, ignore
+      if (navLinks.contains(e.target) || hamburger.contains(e.target)) return;
+
+      // else close
+      closeMenu();
+    });
+
+    // Optional: close menu on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        closeMenu();
+      }
+    });
+  }
+
+  // Intersection Observer for scroll animations
+  const animatedItems = document.querySelectorAll('.animated-item');
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  animatedItems.forEach(item => {
+    observer.observe(item);
   });
 });
 </script>
