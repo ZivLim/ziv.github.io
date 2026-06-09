@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – Loyalty</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-hero">
+      <div class="media">
+        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1600&auto=format&fit=crop" alt="Hero"/>
+      </div>
+      <div class="login-copy">
+        <h1>Loyalty grocery store</h1>
+        <p>Freshness you can taste, savings you can trust — shop smarter at Loyalty!</p>
+      </div>
+    </div>
+
+    <div class="login-pane">
+      <form class="login-card" onsubmit="handleLoginSubmit(event)">
+        <div class="brand" style="margin-bottom:8px;"><span class="logo"></span>Loyalty</div>
+        <div class="login-title">Sign in</div>
+        <div class="login-sub">Access your points, promotions & redemptions</div>
+
+        <div class="form-row">
+          <input id="username" class="input" type="text" placeholder="Username" autocomplete="username" required/>
+          <input id="password" class="input" type="password" placeholder="Password" autocomplete="current-password" required/>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:12px;">
+          <span style="color:#6b7280;font-size:13px;">Use any username/password</span>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

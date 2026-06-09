@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home – Loyalty</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand"><span class="logo"></span>Loyalty</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="home.html" id="nav-home" class="active">Home</a>
+        <a href="promotion.html" id="nav-promotion">Promotion</a>
+        <a href="redeem.html" id="nav-redeem">Redeem</a>
+        <a href="settings.html" id="nav-settings">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container safe">
+    <h2 class="section-title">Welcome, <span id="welcomeName">Guest</span></h2>
+
+    <section class="points">
+      <article class="card points-card">
+        <div>
+          <div style="color:#6b7280;font-size:13px;">Your Points</div>
+          <div class="points-value" id="pointsValue">0</div>
+          <span class="badge" id="tierBadge">Member</span>
+        </div>
+        <div style="flex:1;">
+          <div class="progress"><span id="progressBar"></span></div>
+          <div class="points-note">Next tier at <span id="nextTier">1000</span> pts</div>
+        </div>
+      </article>
+
+      <article class="card" style="padding:16px;display:flex;align-items:center;gap:12px;">
+        <div class="badge">Weekly Boost</div>
+        <div style="color:#475569;">Earn 2× points on beverages every Friday.</div>
+      </article>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', renderHome);
+  </script>
+</body>
+</html>

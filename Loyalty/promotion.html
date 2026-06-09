@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Promotions – Loyalty</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand"><span class="logo"></span>Loyalty</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="home.html" id="nav-home">Home</a>
+        <a href="promotion.html" id="nav-promotion" class="active">Promotion</a>
+        <a href="redeem.html" id="nav-redeem">Redeem</a>
+        <a href="settings.html" id="nav-settings">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container safe">
+    <h2 class="section-title">Latest Promotions</h2>
+
+    <section class="grid grid-auto">
+      <article class="card promo-card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop" alt="Burger Deal">
+        </div>
+        <div class="body">
+          <div class="promo-title">Buy 1 Get 1 Burger</div>
+          <div class="promo-desc">Limited time only</div>
+        </div>
+      </article>
+
+      <article class="card promo-card">
+        <div class="media">
+          <img src="icedcoffee.gif" alt="Coffee GIF">
+        </div>
+        <div class="body">
+          <div class="promo-title">Free Iced Coffee</div>
+          <div class="promo-desc">For Silver tier and above</div>
+        </div>
+      </article>
+
+      <article class="card promo-card">
+        <div class="media">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200&auto=format&fit=crop" alt="Combo Meal">
+        </div>
+        <div class="body">
+          <div class="promo-title">Combo Meal 20% Off</div>
+          <div class="promo-desc">Save more with points</div>
+        </div>
+      </article>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script> requireAuth(); </script>
+</body>
+</html>

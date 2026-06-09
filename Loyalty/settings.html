@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings – Loyalty</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <div class="brand"><span class="logo"></span>Loyalty</div>
+      <nav class="nav" aria-label="Primary">
+        <a href="home.html" id="nav-home">Home</a>
+        <a href="promotion.html" id="nav-promotion">Promotion</a>
+        <a href="redeem.html" id="nav-redeem">Redeem</a>
+        <a href="settings.html" id="nav-settings" class="active">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container safe">
+    <h2 class="section-title">Settings</h2>
+
+    <section class="settings-grid">
+      <article class="card" style="padding:16px;">
+        <div style="font-weight:800;margin-bottom:6px;">Account</div>
+        <div id="accountName" style="color:#475569;">Guest</div>
+      </article>
+
+      <article class="card" style="padding:16px;">
+        <div style="font-weight:800;margin-bottom:6px;">Address</div>
+        <div id="addressText" style="color:#475569;">Add your delivery address</div>
+        <div style="margin-top:12px;"><button id="editAddressBtn" class="btn btn-primary">Edit</button></div>
+      </article>
+
+      <article class="card" style="padding:16px;">
+        <div style="font-weight:800;margin-bottom:6px;">Feedback</div>
+        <textarea id="feedback" rows="4" placeholder="Tell us what to improve" class="input"></textarea>
+        <div style="margin-top:12px;"><button id="sendFbBtn" class="btn btn-primary">Send</button></div>
+      </article>
+
+      <article class="card" style="padding:16px;">
+        <div style="font-weight:800;margin-bottom:6px;">About Us</div>
+        <div style="color:#475569;">Version 1.0 • © Loyalty</div>
+        <div style="margin-top:12px;"><button id="logoutBtn" class="btn btn-ghost">Log out</button></div>
+      </article>
+    </section>
+
+    <div class="footer-spacer"></div>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', initSettings);
+  </script>
+</body>
+</html>
