@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> JIVEN Café </title>
+  <link rel="icon" href="jivenicon.png" type="image/png">
+  <meta name="description" content="An artisanal café experience — creative menu, specialty drinks, handcrafted vibes." />
+  <link rel="stylesheet" href="thebarista.css">
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <!-- preload hero image -->
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1542181961-9590d0c79dab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="custom-scrollbar">
+
+<header class="fixed top-0 w-full z-50 header-bg" id="site-header" role="banner">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#home" class="text-2xl md:text-3xl font-serif tracking-wide text-cream logo">JIVEN Café<span class="accent">.</span></a>
+
+    <!-- Hamburger button (mobile) -->
+    <button id="hamburger" class="hamburger" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <!-- Navigation Links -->
+    <nav>
+      <ul id="nav-links" class="nav-links gap-6 items-center" aria-label="Main navigation">
+        <li><a href="#home" class="nav-item">Home</a></li>
+        <li><a href="#menu" class="nav-item">Menu</a></li>
+        <li><a href="#pricing" class="nav-item">Pricing</a></li>
+        <li><a href="#contact" class="nav-item">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero relative min-h-screen flex items-center" aria-label="Hero">
+  <div class="absolute inset-0 hero-bg" role="img" aria-hidden="true"></div>
+  <div class="absolute inset-0 overlay" aria-hidden="true"></div>
+
+  <div class="container mx-auto relative z-10 px-6 py-20">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-7">
+        <h1 class="display-title animated-item fade-right">A craft for the senses — poured, time-worn, intentional.</h1>
+        <p class="lead animated-item fade-right delay-100">More than coffee — a collection of small rituals and surprising flavours. Open minds, warm cups.</p>
+        <div class="mt-6 animated-item fade-right delay-200">
+          <a href="#menu" class="cta">Explore the Menu</a>
+          <a href="#contact" class="cta ghost ml-4">Order / Contact</a>
+        </div>
+      </div>
+
+      <div class="md:col-span-5 md:relative md:pl-6">
+        <div class="feature-card animated-item fade-left delay-100">
+          <img src="cafelatte.gif"
+               alt="Latte art close-up"
+               class="rounded-xl object-cover w-full h-72"
+               loading="eager">
+          <div class="feature-text">
+            <h4 class="font-serif">Small-batch focus</h4>
+            <p class="text-sm">Single-origin selections rotated weekly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-16 scroll-mt-24" aria-label="Menu">
+  <div class="container mx-auto px-6">
+    <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-y-12 gap-x-8">
+      <!-- Item A -->
+      <article class="menu-block animated-item fade-left" data-item="0">
+        <div class="image-wrap">
+          <img src="velvetlatte.jpg" alt="Velvet Latte" class="rounded-xl object-cover w-full" loading="eager">
+        </div>
+        <div class="card-overlap left">
+          <h3 class="font-serif">The Velvet Latte</h3>
+          <p class="muted">A smooth, creamy latte with a hint of caramel and vanilla. Silky mouthfeel, gentle finish.</p>
+        </div>
+      </article>
+
+      <!-- Item B -->
+      <article class="menu-block animated-item fade-right" data-item="1">
+        <div class="image-wrap">
+          <img src="artisancoldbrew.jpg" alt="Artisan Cold Brew" class="rounded-xl object-cover w-full" loading="lazy">
+        </div>
+        <div class="card-overlap right">
+          <h3 class="font-serif">Artisan Cold Brew</h3>
+          <p class="muted">Our signature blend, slow-steeped for clarity and low acidity.</p>
+        </div>
+      </article>
+
+      <!-- Item C -->
+      <article class="menu-block animated-item fade-left" data-item="2">
+        <div class="image-wrap">
+          <img src="matchasupreme.jpg" alt="Matcha Supreme" class="rounded-xl object-cover w-full" loading="lazy">
+        </div>
+        <div class="card-overlap left">
+          <h3 class="font-serif">Matcha Supreme</h3>
+          <p class="muted">Ceremonial-grade matcha — whisked to bloom with bright umami notes.</p>
+        </div>
+      </article>
+
+      <!-- Item D -->
+      <article class="menu-block animated-item fade-right" data-item="3">
+        <div class="image-wrap">
+          <img src="goldensunrise.jpg" alt="Golden Sunrise" class="rounded-xl object-cover w-full" loading="lazy">
+        </div>
+        <div class="card-overlap right">
+          <h3 class="font-serif">Golden Sunrise</h3>
+          <p class="muted">Turmeric + ginger latte with warm spice and gentle sweetness.</p>
+        </div>
+      </article>
+
+      <!-- Item E -->
+      <article class="menu-block animated-item fade-left" data-item="4">
+        <div class="image-wrap">
+          <img src="thealchemist'sbrew.jpg" alt="The Alchemist's Brew" class="rounded-xl object-cover w-full" loading="lazy">
+        </div>
+        <div class="card-overlap left">
+          <h3 class="font-serif">The Alchemist's Brew</h3>
+          <p class="muted">An experimental pour-over — rotating beans, rotating notes.</p>
+        </div>
+      </article>
+
+      <!-- Item F -->
+      <article class="menu-block animated-item fade-right" data-item="5">
+        <div class="image-wrap">
+          <img src="espressoconpanna.jpg" alt="Espresso Con Panna" class="rounded-xl object-cover w-full" loading="lazy">
+        </div>
+        <div class="card-overlap right">
+          <h3 class="font-serif">Espresso Con Panna</h3>
+          <p class="muted">Bold espresso softened by a dollop of fresh whipped cream.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="py-16 bg-deco relative" aria-label="Pricing">
+  <div class="container mx-auto px-6">
+ 
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="price-card animated-item fade-up">
+        <img src="velvetlatte.jpg" alt="Velvet Latte" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">The Velvet Latte</h4>
+          <p class="muted">Classic favorite.</p>
+          <div class="price-large">$5.50</div>
+        </div>
+      </div>
+
+      <div class="price-card tall animated-item fade-up delay-150">
+        <img src="matchasupreme.jpg" alt="Matcha Supreme" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">Matcha Supreme</h4>
+          <p class="muted">Ceremonial grade.</p>
+          <div class="price-large">$6.50</div>
+        </div>
+      </div>
+
+      <div class="price-card animated-item fade-up delay-300">
+        <img src="thealchemist'sbrew.jpg" alt="The Alchemist's Brew" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">The Alchemist's Brew</h4>
+          <p class="muted">Rotating rare beans.</p>
+          <div class="price-large">$7.00</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="price-card animated-item fade-up">
+        <img src="artisancoldbrew.jpg" alt="Artisan Cold Brew" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">Artisan Cold Brew</h4>
+          <p class="muted">Brewed slow, served smooth.</p>
+          <div class="price-large">$5.00</div>
+        </div>
+      </div>
+
+      <div class="price-card tall animated-item fade-up delay-150">
+        <img src="goldensunrise.jpg" alt="Golden Sunrise" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">Golden Sunrise</h4>
+          <p class="muted">Turmeric-kissed and uplifting.</p>
+          <div class="price-large">$5.80</div>
+        </div>
+      </div>
+
+      <div class="price-card animated-item fade-up delay-300">
+        <img src="espressoconpanna.jpg" alt="Espresso Con Panna" class="rounded-t-xl w-full" loading="lazy">
+        <div class="p-6">
+          <h4 class="font-serif">Espresso Con Panna</h4>
+          <p class="muted">Bold shot, soft cream crown.</p>
+          <div class="price-large">$4.80</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="#contact" class="cta">Order Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-16 scroll-mt-24" aria-label="Contact">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div class="animated-item fade-left">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="muted">Quick questions, special orders, or collaborations — we listen.</p>
+
+        <div class="mt-6 contact-box">
+          <a href="tel:+601156955430" class="contact-btn"><strong>Call</strong> +60 11 5695 5430</a>
+          <a href="mailto:hourglass2000701@gmail.com" class="contact-btn ghost ml-4"><strong>Email</strong> hourglass2000701@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="animated-item fade-right">
+        <div class="contact-image rounded-xl overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+               alt="Coffee beans and cup" class="object-cover w-full h-96" loading="lazy">
+          <div class="coffee-stain" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (!hamburger || !navLinks) return;
+
+  // Toggle menu open/close
+  function openMenu() {
+    hamburger.setAttribute('aria-expanded', 'true');
+    navLinks.classList.add('active');
+    document.body.classList.add('nav-open'); // used by your CSS to transform hamburger
+    document.body.style.overflow = 'hidden'; // lock scroll while menu open
+  }
+
+  function closeMenu() {
+    hamburger.setAttribute('aria-expanded', 'false');
+    navLinks.classList.remove('active');
+    document.body.classList.remove('nav-open');
+    document.body.style.overflow = ''; // restore scroll
+  }
+
+  hamburger.addEventListener('click', (e) => {
+    const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+    if (expanded) closeMenu();
+    else openMenu();
+  });
+
+  // Close when any nav link is clicked (mobile)
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      if (navLinks.classList.contains('active')) closeMenu();
+    });
+  });
+
+  // Close when clicking outside the nav links (mobile)
+  document.addEventListener('click', (e) => {
+    if (!navLinks.classList.contains('active')) return;
+
+    // if click is inside nav or on hamburger, ignore
+    if (navLinks.contains(e.target) || hamburger.contains(e.target)) return;
+
+    // else close
+    closeMenu();
+  });
+
+  // Optional: close menu on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+      closeMenu();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
